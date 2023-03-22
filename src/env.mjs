@@ -6,6 +6,10 @@ import { z } from "zod";
  */
 const server = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]),
+  DATABASE_HOST:z.string(),
+  DATABASE_USER:z.string(),
+  DATABASE_USER_PASS:z.string(),
+  DATABASE:z.string(),
 });
 
 /**
