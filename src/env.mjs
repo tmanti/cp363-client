@@ -28,7 +28,10 @@ const client = z.object({
  */
 const processEnv = {
   NODE_ENV: process.env.NODE_ENV,
-  // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+  DATABASE_HOST: process.env.DATABASE_HOST,
+  DATABASE_USER: process.env.DATABASE_USER,
+  DATABASE_USER_PASS: process.env.DATABASE_USER_PASS,
+  DATABASE: process.env.DATABASE,
 };
 
 // Don't touch the part below
