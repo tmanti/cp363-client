@@ -8,5 +8,5 @@ export const mysql = createPool({
     host:env.DATABASE_HOST,
     user:env.DATABASE_USER,
     password:env.DATABASE_USER_PASS,
-    database:env.DATABASE
+    //database:env.DATABASE
 })
