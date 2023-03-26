@@ -1,12 +1,16 @@
 create database IF NOT EXISTS HotelManagement;
 /
-create table `HotelManagement`.`Address` (
-    `address-id` INT NOT NULL AUTO_INCREMENT,
-    `street-address` VARCHAR(100) NOT NULL,
-    `city` VARCHAR(60) NOT NULL,
-    `country` VARCHAR(45) NOT NULL,
-    `province` VARCHAR(45) NOT NULL,
-    `zip_code` VARCHAR(10) NOT NULL,
-    
-    PRIMARY KEY(`address-id`)
-);
+CREATE TABLE `HotelManagement`.`Department` (
+  `department-id` INT NOT NULL AUTO_INCREMENT,
+  `department-name` VARCHAR(45) NOT NULL,
+  `manager` INT,
+  PRIMARY KEY (`department-id`));
+/
+CREATE TABLE `HotelManagement`.`Shift` (
+  `shift-id` INT NOT NULL AUTO_INCREMENT,
+  `shift-time` VARCHAR(45) NOT NULL,
+  `department` INT NOT NULL,
+  constraint `in-department` 
+	foreign key(`department`) 
+	references `HotelManagement`.`Department`(`department-id`),
+  PRIMARY KEY (`shift-id`));    

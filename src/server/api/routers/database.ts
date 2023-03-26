@@ -3,9 +3,26 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 import * as fs from 'fs';
+import Pool from "mysql2/typings/mysql/lib/Pool";
 
-const read_sql:string[] = (file:string)=>{
+const read_sql = (file:string):string=>{
     return fs.readFileSync("db/"+file).toString()
+}
+
+const parse_batch = (sql:string):string[]=>{
+    return sql.split("/");
+}
+
+const query_batch = (sql_batch:string[], mysql:Pool)=>{
+    mysql.getConnection((err, conn)=>{
+        if(err){ console.error(err); return; }
+        for(let query of sql_batch){
+            conn.query(query, (conn_err, result)=>{
+                if(conn_err){ console.error(conn_err); return; }
+                console.log(result);
+            })
+        }
+    })
 }
 
 export const databaseRouter = createTRPCRouter({
@@ -21,29 +38,19 @@ export const databaseRouter = createTRPCRouter({
     createTables: publicProcedure
         .mutation(async ({ ctx }) =>{
             const sql = read_sql("create_tables.sql")
-
-            ctx.mysql.query(sql, (err, result)=>{
-                if(err){ console.error(err); return; }
-                console.log(result)
-            })
+            query_batch(parse_batch(sql), ctx.mysql);
         }),
     populate: publicProcedure
         .mutation(async ({ctx})=>{
             const sql = read_sql("populate_tables.sql")
 
-            ctx.mysql.query(sql, (err, result)=>{
-                if(err){ console.error(err); return; }
-                console.log(result)
-            })
+            query_batch(parse_batch(sql), ctx.mysql);
         }),
     dropAll: publicProcedure
         .mutation(async ({ ctx })=>{
             const sql = read_sql("drop_tables.sql");
 
-            ctx.mysql.query(sql, (err, result)=>{
-                if(err){ console.error(err); return; }
-                console.log(result)
-            })
+            query_batch(parse_batch(sql), ctx.mysql);
         }),
     execSql: publicProcedure
         .input(
@@ -54,9 +61,11 @@ export const databaseRouter = createTRPCRouter({
         .mutation(async ({ ctx, input })=>{
             const sql = read_sql(input.sql_file);
 
-            ctx.mysql.query(sql, (err, result)=>{
-                if(err){ console.error(err); return; }
-                console.log(result)
-            })
+            query_batch(parse_batch(sql), ctx.mysql);
+        }),
+
+    getSqlFiles: publicProcedure
+        .query(async ({ ctx })=>{
+            return fs.readdirSync("db/");
         })
 })  
