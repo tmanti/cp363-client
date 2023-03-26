@@ -3,9 +3,12 @@ import { useState } from "react";
 import { type NextPage } from "next";
 import Head from "next/head";
 
+import { useRouter } from "next/router";
+
 import { api } from "~/utils/api";
 
-const Test: NextPage = () => {
+const Manage: NextPage = () => {
+    const router = useRouter();
 
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState("");
@@ -16,7 +19,7 @@ const Test: NextPage = () => {
     const createTables = api.database.createTables.useMutation();
     const populateDatabase = api.database.populate.useMutation();
     const dropDatabase = api.database.dropAll.useMutation();
-    const submitSql = api.database.execSql.useMutation();
+    const submitSql = api.database.execSqlFile.useMutation();
 
     const sqlfiles = api.database.getSqlFiles.useQuery();
 
@@ -98,6 +101,12 @@ const Test: NextPage = () => {
             </Head>
             <main>
                 <h1 className="text-lg">Database Control Page</h1>
+                <button
+                    className="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                    onClick={()=>{router.push("/tables");}}
+                >
+                    View Tables Webpage
+                </button>
                 <div className="py-2">
                 <hr></hr>
                 </div>
@@ -170,9 +179,9 @@ const Test: NextPage = () => {
                     <hr></hr>
                     </div>
                     <div>
-                        <p className="text-red-500">{error}</p>
+                        <p className="text-green-400">{result}</p>\
                         <br></br>
-                        <p className="text-green-400">{result}</p>
+                        <p className="text-red-500">{error}</p>
                     </div>
                 </div>
             </main>
@@ -181,4 +190,4 @@ const Test: NextPage = () => {
 
 };
 
-export default Test;
+export default Manage;

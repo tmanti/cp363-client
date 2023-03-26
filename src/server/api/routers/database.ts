@@ -52,7 +52,7 @@ export const databaseRouter = createTRPCRouter({
 
             query_batch(parse_batch(sql), ctx.mysql);
         }),
-    execSql: publicProcedure
+    execSqlFile: publicProcedure
         .input(
             z.object({
                 sql_file:z.string(),
@@ -63,7 +63,7 @@ export const databaseRouter = createTRPCRouter({
 
             query_batch(parse_batch(sql), ctx.mysql);
         }),
-
+    
     getSqlFiles: publicProcedure
         .query(async ({ ctx })=>{
             return fs.readdirSync("db/");
