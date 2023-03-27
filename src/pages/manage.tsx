@@ -179,7 +179,7 @@ const Manage: NextPage = () => {
                     <hr></hr>
                     </div>
                     <div>
-                        <p className="text-green-400">{result}</p>\
+                        <p className="text-green-400">{result}</p>
                         <br></br>
                         <p className="text-red-500">{error}</p>
                     </div>
