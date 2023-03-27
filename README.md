@@ -1,15 +1,33 @@
-# Create T3 App
+# CP363 Database Client
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+A database client used to interact with a mysql database server using our HotelManagement database system
 
-## What's next? How do I make an app with this?
+## How to run
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+sudo apt install mysql-server
+sudo service mysql start
+sudo mysql
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+use link to make user with permissions: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+(CREATE USER 'hotel'@'localhost' IDENTIFIED BY 'manage'; 
+GRANT ALL PRIVILEGES ON *.* TO 'hotel'@'localhost' WITH GRANT OPTION; 
+FLUSH PRIVILEGES;)
+
+git clone https://github.com/tmanti/cp363-client.git
+
+in cp363-client folder create .env file
+copy fields from .env.example file
+NODE_ENV will be development
+database_host is localhost
+database="HotelManagement"
+user and user pass are the new user in mysql
+created with link above
+npm install
+npm run dev
+
+## Technologies Used
 
 - [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
 - [Tailwind CSS](https://tailwindcss.com)
 - [tRPC](https://trpc.io)
@@ -22,7 +40,3 @@ To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the fo
 - [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
 You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
