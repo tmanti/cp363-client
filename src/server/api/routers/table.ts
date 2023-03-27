@@ -8,7 +8,7 @@ import * as fs from 'fs';
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 const read_sql = (file:string):string=>{
-    return fs.readFileSync("db/"+file).toString();
+    return fs.readFileSync("db/query/"+file).toString();
 }
 
 //for table specific queries
@@ -37,6 +37,8 @@ export const tableRouter = createTRPCRouter({
             const sql = read_sql(input.sql_file);        
 
             const pool = ctx.mysql.promise();
+
+            await pool.query("Use HotelManagement;");
 
             const [rows, fields] = await pool.query(sql);
 

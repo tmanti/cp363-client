@@ -6,7 +6,7 @@ import * as fs from 'fs';
 import type Pool from "mysql2/typings/mysql/lib/Pool";
 
 const read_sql = (file:string):string=>{
-    return fs.readFileSync("db/"+file).toString()
+    return fs.readFileSync("db/manage/"+file).toString()
 }
 
 const parse_batch = (sql:string):string[]=>{
