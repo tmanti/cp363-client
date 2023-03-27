@@ -61,11 +61,30 @@ const Tables: NextPage = () => {
                 <hr></hr>
                 </div>
                 <div>
-                    {queryResult?JSON.stringify(queryResult.rows):""}
+                <table style={{ borderCollapse: "separate", borderSpacing: "10px" }}>
+                        <thead>
+                            <tr>
+                                {queryResult &&
+                                Object.keys(queryResult.rows[0]).map((key) => (
+                                    <th key={key}>{key}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {queryResult &&
+                                queryResult.rows.map((row, i) => (
+                                <tr key={i}>
+                                    {Object.keys(row).map((key) => (
+                                    <td key={key}>{row[key]}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </main>
         </>
-    )
+    );
 }
 
 export default Tables;
