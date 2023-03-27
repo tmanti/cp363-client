@@ -66,6 +66,6 @@ export const databaseRouter = createTRPCRouter({
     
     getSqlFiles: publicProcedure
         .query(()=>{
-            return fs.readdirSync("db/");
+            return fs.readdirSync("db/manage/");
         })
 })  

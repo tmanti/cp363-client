@@ -59,7 +59,7 @@ const Tables: NextPage = () => {
                 <div className="py-2">
                 <hr></hr>
                 </div>
-                <div>  
+                <div className="flex">  
                     <button
                         type="button"
                         onClick={()=>{query_db("Address")}}
@@ -67,7 +67,6 @@ const Tables: NextPage = () => {
                     >
                         Query Address Table
                     </button>
-
                 </div>
                 <div className="py-2">
                 <hr></hr>

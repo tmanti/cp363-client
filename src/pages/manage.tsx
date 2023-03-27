@@ -23,7 +23,7 @@ const Manage: NextPage = () => {
 
     const sqlfiles = api.database.getSqlFiles.useQuery();
 
-    const submit_createTables = async() =>{
+    const submit_createTables = () =>{
         setLoading(true);
         try{
             createTables.mutate();
@@ -38,7 +38,7 @@ const Manage: NextPage = () => {
         setLoading(false);
     }
 
-    const submit_dropTables = async()=>{
+    const submit_dropTables = ()=>{
         setLoading(true);
         try{
             dropDatabase.mutate();
@@ -54,7 +54,7 @@ const Manage: NextPage = () => {
         setLoading(false);
     }
 
-    const submit_populateTables = async()=>{
+    const submit_populateTables = ()=>{
         setLoading(true);
         try{
             populateDatabase.mutate();
@@ -70,7 +70,7 @@ const Manage: NextPage = () => {
         setLoading(false);
     }
 
-    const submit_sql = async(sql_file:string)=>{
+    const submit_sql = (sql_file:string)=>{
         setLoading(true);
         try{
             if(sqlfiles.data && sqlfiles.data.includes(sql_file)){
@@ -103,7 +103,7 @@ const Manage: NextPage = () => {
                 <h1 className="text-lg">Database Control Page</h1>
                 <button
                     className="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                    onClick={()=>{router.push("/tables");}}
+                    onClick={()=>{void router.push("/tables");}}
                 >
                     View Tables Webpage
                 </button>
