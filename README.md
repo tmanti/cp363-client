@@ -3,27 +3,36 @@
 A database client used to interact with a mysql database server using our HotelManagement database system
 
 ## How to run
-
+```bash
 sudo apt install mysql-server
 sudo service mysql start
 sudo mysql
+```
 
 use link to make user with permissions: https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
-(CREATE USER 'hotel'@'localhost' IDENTIFIED BY 'manage'; 
+```SQL
+CREATE USER 'hotel'@'localhost' IDENTIFIED BY 'manage'; 
 GRANT ALL PRIVILEGES ON *.* TO 'hotel'@'localhost' WITH GRANT OPTION; 
-FLUSH PRIVILEGES;)
+FLUSH PRIVILEGES;
+```
 
 git clone https://github.com/tmanti/cp363-client.git
 
 in cp363-client folder create .env file
 copy fields from .env.example file
+
+```
 NODE_ENV will be development
 database_host is localhost
 database="HotelManagement"
-user and user pass are the new user in mysql
-created with link above
+```
+
+user and user pass are the new user in mysql created with link above.
+
+```bash
 npm install
 npm run dev
+```
 
 ## Technologies Used
 
